@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Col, ProgressBar, Row, Button } from 'react-bootstrap'
 
-interface IPros {
+interface IProps {
   data: number[]
 }
 
-const LineGraphs:React.FC<IPros> = ({data}) => {
+const LineGraphs:React.FC<IProps> = ({data}) => {
 
   return (
     <div style={{marginTop: '5%'}} >

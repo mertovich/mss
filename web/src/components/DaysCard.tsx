@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Card, Container, InputGroup, FormControl, Button, Alert } from 'react-bootstrap'
 
-interface IPros {
+interface IProps {
     addData: (day: number, amount: number) => void
 }
 
-const DaysCard:React.FC<IPros> = ({addData}) => {
+const DaysCard:React.FC<IProps> = ({addData}) => {
     const [days, setDays] = useState<number>()
     const [amount, setaAount] = useState<number>()
     const [validated, setValidated] = useState<String>('')
@@ -43,7 +43,6 @@ const DaysCard:React.FC<IPros> = ({addData}) => {
             <Card
                 bg='primary'
                 text='white'
-                style={{ width: '18rem' }}
                 className="mb-2">
                 <Card.Header>Add</Card.Header>
                 <Card.Body>

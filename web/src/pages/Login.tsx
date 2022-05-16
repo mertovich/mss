@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import { Container } from 'react-bootstrap'
 import { Form, Button } from 'react-bootstrap'
 
-interface IPros {
+interface IProps {
     handleLogin: (user: string) => void
 }
 
-const Login: React.FC<IPros> = ({ handleLogin }) => {
+const Login: React.FC<IProps> = ({ handleLogin }) => {
     const [user, setUser] = useState<string>('')
     return (
         <Container>

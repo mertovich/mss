@@ -10,6 +10,7 @@ const App = (props: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState<string | null>(null)
   const [data, setData] = useState<number[]>([])
+  const [total, setTotal] = useState<number>(0)
 
   const handleLogin = (user: string) => {
     setIsLoggedIn(true)
@@ -18,15 +19,17 @@ const App = (props: Props) => {
     localStorage.setItem('user', user)
     localStorage.setItem('isLoggedIn', 'true')
     localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+    localStorage.setItem('total', '0')
   }
 
-  const loginControl = () => {
+  const loginControl = async () => {
     const isLoggedIn = localStorage.getItem('isLoggedIn')
     if (isLoggedIn === 'true') {
       setIsLoggedIn(true)
       setUser(localStorage.getItem('user'))
       const tmpData = JSON.parse(localStorage.getItem('data') || '[]')
       setData(tmpData)
+      setTotal(Number(localStorage.getItem('total') || '0'))
     }
   }
 
@@ -36,21 +39,35 @@ const App = (props: Props) => {
     localStorage.setItem('isLoggedIn', 'false')
     localStorage.setItem('user', '')
     localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+    setTotal(0)
   }
 
-  const addData = (day:number, amount:number) => {
+  const addData = async (day:number, amount:number) => {
     const tmpData = data as number[]
     tmpData[day] = amount
     setData(tmpData)
     localStorage.setItem('data', JSON.stringify(tmpData))
     const getData = JSON.parse(localStorage.getItem('data') || '[]')
     setData(getData)
+    totalMoney()
   }
 
   const clearDashBoard = () => {
     localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
     const getData = JSON.parse(localStorage.getItem('data') || '[]')
     setData(getData)
+    localStorage.setItem('total', '0')
+    setTotal(Number(localStorage.getItem('total') || '0'))
+  }
+
+  const totalMoney = () => {
+    let sum = 0
+    data.forEach(element => {
+      sum += element
+    }
+    )
+    setTotal(sum)
+    localStorage.setItem('total', sum.toString())
   }
 
   useEffect(() => {
@@ -61,7 +78,7 @@ const App = (props: Props) => {
     <div>
       <Routes>
         {isLoggedIn ?
-          <Route path="/" element={<DashBoard clearDashBoard={clearDashBoard} data={data} addData={addData} handleLogout={handleLogout} user={user} />} />
+          <Route path="/" element={<DashBoard total={total} clearDashBoard={clearDashBoard} data={data} addData={addData} handleLogout={handleLogout} user={user} />} />
           :
           <Route path="/" element={<Login handleLogin={handleLogin} />} />
         }
