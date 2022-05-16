@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import DashBoard from './pages/DashBoard'
+import DashBoard from './pages/Dashboard'
 import Login from './pages/Login'
 
 
@@ -26,6 +26,13 @@ const App = (props: Props) => {
     }
   }
 
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+    setUser(null)
+    localStorage.setItem('isLoggedIn', 'false')
+    localStorage.setItem('user', '')
+  }
+
   useEffect(() => {
     loginControl()
   }, [])
@@ -34,7 +41,7 @@ const App = (props: Props) => {
     <div>
       <Routes>
         {isLoggedIn ?
-          <Route path="/" element={<DashBoard user={user} />} />
+          <Route path="/" element={<DashBoard handleLogout={handleLogout} user={user} />} />
           :
           <Route path="/" element={<Login handleLogin={handleLogin} />} />
         }
