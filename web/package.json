@@ -1,6 +1,6 @@
 {
   "name": "web",
-  "homepage": "https://mertovich.github.io/mss/",
+  "homepage": "https://mertovich.github.io/mss",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
