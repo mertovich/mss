@@ -9,12 +9,13 @@ interface IPros {
   handleLogout: () => void
   addData: (days: number, amount: number) => void
   data: number[]
+  clearDashBoard: () => void
 }
 
-const DashBoard: React.FC<IPros> = ({ user, handleLogout, addData, data }) => {
+const DashBoard: React.FC<IPros> = ({ user, handleLogout, addData, data, clearDashBoard }) => {
   return (
     <div>
-      <NavBar user={user} handleLogout={handleLogout} />
+      <NavBar user={user} handleLogout={handleLogout} clearDashBoard={clearDashBoard} />
       <Container className='text-center' >
         <LineGraphs data={data} />
       </Container >

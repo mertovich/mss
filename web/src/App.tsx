@@ -17,7 +17,7 @@ const App = (props: Props) => {
     console.log(user)
     localStorage.setItem('user', user)
     localStorage.setItem('isLoggedIn', 'true')
-    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
   }
 
   const loginControl = () => {
@@ -35,7 +35,7 @@ const App = (props: Props) => {
     setUser(null)
     localStorage.setItem('isLoggedIn', 'false')
     localStorage.setItem('user', '')
-    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
   }
 
   const addData = (day:number, amount:number) => {
@@ -43,6 +43,12 @@ const App = (props: Props) => {
     tmpData[day] = amount
     setData(tmpData)
     localStorage.setItem('data', JSON.stringify(tmpData))
+    const getData = JSON.parse(localStorage.getItem('data') || '[]')
+    setData(getData)
+  }
+
+  const clearDashBoard = () => {
+    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
     const getData = JSON.parse(localStorage.getItem('data') || '[]')
     setData(getData)
   }
@@ -55,7 +61,7 @@ const App = (props: Props) => {
     <div>
       <Routes>
         {isLoggedIn ?
-          <Route path="/" element={<DashBoard data={data} addData={addData} handleLogout={handleLogout} user={user} />} />
+          <Route path="/" element={<DashBoard clearDashBoard={clearDashBoard} data={data} addData={addData} handleLogout={handleLogout} user={user} />} />
           :
           <Route path="/" element={<Login handleLogin={handleLogin} />} />
         }
