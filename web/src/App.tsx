@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import DashBoard from './pages/Dashboard'
 import Login from './pages/Login'
-
 
 type Props = {}
 
@@ -76,13 +74,11 @@ const App = (props: Props) => {
 
   return (
     <div>
-      <Routes>
         {isLoggedIn ?
-          <Route path="/" element={<DashBoard total={total} clearDashBoard={clearDashBoard} data={data} addData={addData} handleLogout={handleLogout} user={user} />} />
+          <DashBoard total={total} clearDashBoard={clearDashBoard} data={data} addData={addData} handleLogout={handleLogout} user={user} />
           :
-          <Route path="/" element={<Login handleLogin={handleLogin} />} />
+          <Login handleLogin={handleLogin} />
         }
-      </Routes>
     </div>
   )
 }
