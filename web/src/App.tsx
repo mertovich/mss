@@ -7,8 +7,9 @@ import Login from './pages/Login'
 type Props = {}
 
 const App = (props: Props) => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState<string | null>(null)
+  const [data, setData] = useState<number[]>([])
 
   const handleLogin = (user: string) => {
     setIsLoggedIn(true)
@@ -16,6 +17,7 @@ const App = (props: Props) => {
     console.log(user)
     localStorage.setItem('user', user)
     localStorage.setItem('isLoggedIn', 'true')
+    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
   }
 
   const loginControl = () => {
@@ -23,6 +25,8 @@ const App = (props: Props) => {
     if (isLoggedIn === 'true') {
       setIsLoggedIn(true)
       setUser(localStorage.getItem('user'))
+      const tmpData = JSON.parse(localStorage.getItem('data') || '[]')
+      setData(tmpData)
     }
   }
 
@@ -31,6 +35,16 @@ const App = (props: Props) => {
     setUser(null)
     localStorage.setItem('isLoggedIn', 'false')
     localStorage.setItem('user', '')
+    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+  }
+
+  const addData = (day:number, amount:number) => {
+    const tmpData = data as number[]
+    tmpData[day] = amount
+    setData(tmpData)
+    localStorage.setItem('data', JSON.stringify(tmpData))
+    const getData = JSON.parse(localStorage.getItem('data') || '[]')
+    setData(getData)
   }
 
   useEffect(() => {
@@ -41,7 +55,7 @@ const App = (props: Props) => {
     <div>
       <Routes>
         {isLoggedIn ?
-          <Route path="/" element={<DashBoard handleLogout={handleLogout} user={user} />} />
+          <Route path="/" element={<DashBoard data={data} addData={addData} handleLogout={handleLogout} user={user} />} />
           :
           <Route path="/" element={<Login handleLogin={handleLogin} />} />
         }
