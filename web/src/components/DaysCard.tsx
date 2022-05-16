@@ -20,7 +20,7 @@ const DaysCard:React.FC<IProps> = ({addData}) => {
     }
 
     const validateForm = (): boolean => {
-        if(days && amount && days > 0 && amount > 0 && days <= 31) {
+        if(days && amount && days > 0 && amount >= 0 && days <= 31) {
             return true
         }
           return false
