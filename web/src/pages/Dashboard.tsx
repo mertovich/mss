@@ -8,7 +8,7 @@ import TotalCard from '../components/TotalCard'
 interface IProps {
   user: string | null
   handleLogout: () => void
-  addData: (days: number, amount: number) => void
+  addData: (days: number, hour: number) => void
   data: number[]
   clearDashBoard: () => void
   total: number

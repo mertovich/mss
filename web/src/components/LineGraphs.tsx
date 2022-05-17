@@ -27,7 +27,7 @@ const LineGraphs: React.FC<IProps> = ({ data }) => {
         break;
       case 3:
         setPageIndex(3)
-        setPageData(data.slice(20, pageIndex * 10) as number[])
+        setPageData(data.slice(2, pageIndex * 10) as number[])
         break;
     }
   }
@@ -41,7 +41,7 @@ const LineGraphs: React.FC<IProps> = ({ data }) => {
               <p>{index + 1}</p>
             </Col>
             <Col>
-              <ProgressBar variant='progressBarcustomize' key={index + 1} now={item as number} label={`${item}`} />
+              <ProgressBar variant='progressBarcustomize' max={24} key={index + 1} now={item as number} label={`${item}`} />
             </Col>
           </Row>
         )

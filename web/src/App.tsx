@@ -40,9 +40,9 @@ const App = (props: Props) => {
     setTotal(0)
   }
 
-  const addData = async (day:number, amount:number) => {
+  const addData = async (day:number, hour:number) => {
     const tmpData = data as number[]
-    tmpData[day] = amount
+    tmpData[day] = hour
     setData(tmpData)
     localStorage.setItem('data', JSON.stringify(tmpData))
     const getData = JSON.parse(localStorage.getItem('data') || '[]')
