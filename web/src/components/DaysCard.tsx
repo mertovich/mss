@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Container, InputGroup, FormControl, Button, Alert } from 'react-bootstrap'
+import '../App.css'
 
 interface IProps {
     addData: (day: number, amount: number) => void
@@ -41,18 +42,18 @@ const DaysCard:React.FC<IProps> = ({addData}) => {
     return (
         <Container>
             <Card
-                bg='primary'
+                bg='cardcustomize'
                 text='white'
                 className="mb-2">
                 <Card.Header>Add</Card.Header>
                 <Card.Body>
                     <Card.Text>
                         <InputGroup size="sm" className="mb-3">
-                            <InputGroup.Text id="inputGroup-sizing-sm">Day (1-31)</InputGroup.Text>
+                            <InputGroup.Text style={{backgroundColor: '#FFFFFF'}} id="inputGroup-sizing-sm">Day (1-31)</InputGroup.Text>
                             <FormControl onChange={handleChangeDays} type='number' aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                         </InputGroup>
                         <InputGroup size="sm" className="mb-3">
-                            <InputGroup.Text id="inputGroup-sizing-sm">Amount</InputGroup.Text>
+                            <InputGroup.Text style={{backgroundColor: '#FFFFFF'}} id="inputGroup-sizing-sm">Amount</InputGroup.Text>
                             <FormControl onChange={handleChangeAmount} type='number' aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                         </InputGroup>
                     </Card.Text>
