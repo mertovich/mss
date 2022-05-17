@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Container, Table } from 'react-bootstrap'
-import {jsPDF} from 'jspdf';
+import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import {Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 interface IProps {
     data: number[]
@@ -33,29 +33,35 @@ const Month: React.FC<IProps> = ({ data, total }) => {
             marginTop: '2%',
         }}  >
             <Button onClick={() => printDocument()} variant="success">Download table as pdf</Button>
-            <Table id='table' striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Hour</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((day, index) => {
-                        return (
-                            <tr key={index + 1}>
-                                <td>{index + 1}</td>
-                                <td>{day}</td>
-                            </tr>
-                        )
-                    }
-                    )}
-                    <tr>
-                        <td>TOTAL PAY</td>
-                        <td>{totalMoney}</td>
-                    </tr>
-                </tbody>
-            </Table>
+            <div id='table' >
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Hour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((day, index) => {
+                            return (
+                                <tr key={index + 1}>
+                                    <td>{index + 1}</td>
+                                    <td>{day}</td>
+                                </tr>
+                            )
+                        }
+                        )}
+                    </tbody>
+                </Table>
+                <Table striped bordered>
+                    <tbody>
+                        <tr>
+                            <td>TOTAL PAY:</td>
+                            <td>{totalMoney}</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
         </Container>
     )
 }
