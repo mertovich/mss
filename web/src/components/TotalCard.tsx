@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Container, Card } from 'react-bootstrap'
+import '../App.css'
 
 interface IProps {
     total: number
@@ -12,7 +13,7 @@ const TotalCard:React.FC<IProps> = ({total}) => {
         <div>
             <Container>
                 <Card
-                    bg='primary'
+                    bg='cardcustomize'
                     text='white'
                     className="mb-2">
                     <Card.Header>Total</Card.Header>
