@@ -10,7 +10,7 @@ interface IProps {
 const NavBar: React.FC<IProps> = ({ user,handleLogout, clearDashBoard }) => {
     return (
         <div>
-            <Navbar bg="light" variant="light">
+            <Navbar style={{backgroundColor: '#FFE69A'}} variant="light">
                 <Container style={{
                         justifyContent: 'center',
                     }} >
