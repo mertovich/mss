@@ -25,7 +25,7 @@ const Login: React.FC<IProps> = ({ handleLogin }) => {
                         <Form.Group className="mb-3" controlId="name">
                             <Form.Control onChange={(e) => setUser(e.target.value)} type="name" placeholder="Enter name" />
                         </Form.Group>
-                        <Button onClick={() => handleLogin(user)} variant="primary" type="submit">
+                        <Button onClick={() => handleLogin(user)} variant="primary" type="submit" style={{backgroundColor: '#FFD24C', borderColor: '#FFD24C'}} >
                             Submit
                         </Button>
                     </Form>
