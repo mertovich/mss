@@ -1,15 +1,39 @@
 import React, { useState, useEffect } from 'react'
-import { Col, ProgressBar, Row, Button } from 'react-bootstrap'
+import { Col, ProgressBar, Row, Button, Container } from 'react-bootstrap'
 
 interface IProps {
   data: number[]
 }
 
-const LineGraphs:React.FC<IProps> = ({data}) => {
+const LineGraphs: React.FC<IProps> = ({ data }) => {
+  const [pageIndex, setPageIndex] = useState<number>(1)
+  const [pageData, setPageData] = useState<number[]>([])
+
+  useEffect(() => {
+    setPageData(data.slice(0, pageIndex * 10))
+  }
+  , [data, pageIndex])
+
+  const handlePageChange = (index:number) => {
+    switch (index) {
+      case 1:
+        setPageIndex(1)
+        setPageData(data.slice(0, pageIndex * 10) as number[])
+        break;
+      case 2:
+        setPageIndex(2)
+        setPageData(data.slice(10, pageIndex * 10) as number[])
+        break;
+      case 3:
+        setPageIndex(3)
+        setPageData(data.slice(20, pageIndex * 10) as number[])
+        break;
+    }
+  }
 
   return (
-    <div style={{marginTop: '5%'}} >
-      {data.map((item, index) => {
+    <div style={{ marginTop: '5%' }} >
+      {pageData.map((item, index) => {
         return (
           <Row>
             <Col xs={1} >
@@ -22,6 +46,11 @@ const LineGraphs:React.FC<IProps> = ({data}) => {
         )
       }
       )}
+      <Container>
+        <Button variant="warning" style={{margin: '1%'}} onClick={() => handlePageChange(1)}>1</Button>
+        <Button variant="warning" style={{margin: '1%'}} onClick={() => handlePageChange(2)}>2</Button>
+        <Button variant="warning" style={{margin: '1%'}} onClick={() => handlePageChange(3)}>3</Button>
+      </Container>
     </div>
   )
 }
