@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Col, ProgressBar, Row, Button, Container } from 'react-bootstrap'
+import '../App.css'
 
 interface IProps {
   data: number[]
@@ -40,16 +41,16 @@ const LineGraphs: React.FC<IProps> = ({ data }) => {
               <p>{index + 1}</p>
             </Col>
             <Col>
-              <ProgressBar key={index + 1} now={item as number} label={`${item}`} />
+              <ProgressBar variant='progressBarcustomize' key={index + 1} now={item as number} label={`${item}`} />
             </Col>
           </Row>
         )
       }
       )}
       <Container>
-        <Button variant="warning" style={{margin: '1%'}} onClick={() => handlePageChange(1)}>1</Button>
-        <Button variant="warning" style={{margin: '1%'}} onClick={() => handlePageChange(2)}>2</Button>
-        <Button variant="warning" style={{margin: '1%'}} onClick={() => handlePageChange(3)}>3</Button>
+        <Button  style={{margin: '1%',backgroundColor: '#FFE69A',borderColor: '#FFE69A'}} onClick={() => handlePageChange(1)}>1</Button>
+        <Button  style={{margin: '1%',backgroundColor: '#FFE69A',borderColor: '#FFE69A'}} onClick={() => handlePageChange(2)}>2</Button>
+        <Button  style={{margin: '1%',backgroundColor: '#FFE69A',borderColor: '#FFE69A'}} onClick={() => handlePageChange(3)}>3</Button>
       </Container>
     </div>
   )
