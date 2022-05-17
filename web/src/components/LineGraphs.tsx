@@ -13,9 +13,9 @@ const LineGraphs: React.FC<IProps> = ({ data }) => {
   useEffect(() => {
     setPageData(data.slice(0, pageIndex * 10))
   }
-  , [data, pageIndex])
+    , [data, pageIndex])
 
-  const handlePageChange = (index:number) => {
+  const handlePageChange = (index: number) => {
     switch (index) {
       case 1:
         setPageIndex(1)
@@ -48,9 +48,9 @@ const LineGraphs: React.FC<IProps> = ({ data }) => {
       }
       )}
       <Container>
-        <Button  style={{margin: '1%',backgroundColor: '#FFE69A',borderColor: '#FFE69A'}} onClick={() => handlePageChange(1)}>1</Button>
-        <Button  style={{margin: '1%',backgroundColor: '#FFE69A',borderColor: '#FFE69A'}} onClick={() => handlePageChange(2)}>2</Button>
-        <Button  style={{margin: '1%',backgroundColor: '#FFE69A',borderColor: '#FFE69A'}} onClick={() => handlePageChange(3)}>3</Button>
+        <Button style={{ margin: '1%', backgroundColor: '#FFE69A', borderColor: '#FFE69A' }} onClick={() => handlePageChange(1)}>1</Button>
+        <Button style={{ margin: '1%', backgroundColor: '#FFE69A', borderColor: '#FFE69A' }} onClick={() => handlePageChange(2)}>2</Button>
+        <Button style={{ margin: '1%', backgroundColor: '#FFE69A', borderColor: '#FFE69A' }} onClick={() => handlePageChange(3)}>3</Button>
       </Container>
     </div>
   )

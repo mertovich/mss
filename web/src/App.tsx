@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Month from './pages/Month'
 import DashBoard from './pages/Dashboard'
 import Login from './pages/Login'
+import NavBar from './components/NavBar'
 
 type Props = {}
 
@@ -16,7 +19,7 @@ const App = (props: Props) => {
     console.log(user)
     localStorage.setItem('user', user)
     localStorage.setItem('isLoggedIn', 'true')
-    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+    localStorage.setItem('data', JSON.stringify([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]))
     localStorage.setItem('total', '0')
   }
 
@@ -34,13 +37,11 @@ const App = (props: Props) => {
   const handleLogout = () => {
     setIsLoggedIn(false)
     setUser(null)
-    localStorage.setItem('isLoggedIn', 'false')
-    localStorage.setItem('user', '')
-    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
     setTotal(0)
+    localStorage.clear()
   }
 
-  const addData = async (day:number, hour:number) => {
+  const addData = async (day: number, hour: number) => {
     const tmpData = data as number[]
     tmpData[day] = hour
     setData(tmpData)
@@ -51,7 +52,7 @@ const App = (props: Props) => {
   }
 
   const clearDashBoard = () => {
-    localStorage.setItem('data', JSON.stringify([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]))
+    localStorage.setItem('data', JSON.stringify([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]))
     const getData = JSON.parse(localStorage.getItem('data') || '[]')
     setData(getData)
     localStorage.setItem('total', '0')
@@ -74,11 +75,10 @@ const App = (props: Props) => {
 
   return (
     <div>
-        {isLoggedIn ?
-          <DashBoard total={total} clearDashBoard={clearDashBoard} data={data} addData={addData} handleLogout={handleLogout} user={user} />
-          :
-          <Login handleLogin={handleLogin} />
-        }
+      <Routes>
+        <Route path='mss/' element={isLoggedIn ? <div> <NavBar user={user} handleLogout={handleLogout} clearDashBoard={clearDashBoard}  /> <DashBoard total={total} data={data} addData={addData} /> </div> : <Login handleLogin={handleLogin} />} />
+        <Route path="mss/month" element={<Month data={data} total={total} />} />
+      </Routes>
     </div>
   )
 }

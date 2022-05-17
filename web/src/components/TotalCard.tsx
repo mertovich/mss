@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Card, InputGroup, FormControl, Alert, Button } from 'react-bootstrap'
+import { Container, Card, InputGroup, FormControl, Alert, Button,} from 'react-bootstrap'
 import '../App.css'
 
 interface IProps {
@@ -36,29 +36,34 @@ const TotalCard: React.FC<IProps> = ({ total }) => {
         return false
     }
 
-return (
-    <div>
-        <Container>
-            <Card
-                bg='cardcustomize'
-                text='white'
-                className="mb-2">
-                <Card.Header>Total</Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        <Card.Header>Total Money {totalAmount}</Card.Header>
-                    </Card.Text>
-                    <InputGroup size="sm" className="mb-3">
-                            <InputGroup.Text style={{backgroundColor: '#FFFFFF'}} id="inputGroup-sizing-sm">Hourly wage</InputGroup.Text>
+    const saveTotalAmount = () => {
+        localStorage.setItem('totalAmount', JSON.stringify(totalAmount))
+    }
+
+    return (
+        <div>
+            <Container>
+                <Card
+                    bg='cardcustomize'
+                    text='white'
+                    className="mb-2">
+                    <Card.Header>Total</Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            <Card.Header>Total Money {totalAmount}</Card.Header>
+                        </Card.Text>
+                        <InputGroup size="sm" className="mb-3">
+                            <InputGroup.Text style={{ backgroundColor: '#FFFFFF' }} id="inputGroup-sizing-sm">Hourly wage</InputGroup.Text>
                             <FormControl onChange={amountHendler} type='number' aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                         </InputGroup>
-                </Card.Body>
-                {validated === '' ? null : <Alert key='danger' variant='danger'>Incorrect login please try again after checking.</Alert> }
-                <Button onClick={() => submitCard()} variant="light">calculate</Button>
-            </Card>
-        </Container>
-    </div>
-)
+                    </Card.Body>
+                    {validated === '' ? null : <Alert key='danger' variant='danger'>Incorrect login please try again after checking.</Alert>}
+                    <Button style={{margin: '1%'}} onClick={() => submitCard()} variant="light">calculate</Button>
+                    <Button style={{margin: '1%'}} onClick={() => saveTotalAmount()} variant="light">save</Button>
+                </Card>
+            </Container>
+        </div>
+    )
 }
 
 export default TotalCard
